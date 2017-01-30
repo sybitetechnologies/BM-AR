@@ -1,0 +1,21 @@
+'use strict';
+
+bankingApp.directive('userSignup', ['registerService', '$auth', 'Flash', function(registerService, $auth, Flash) {
+  return {
+    restrict: 'E',
+    templateUrl: "<%= asset_path 'signup.html' %>",
+    controller: function($scope) {
+
+      $scope.signup = function() {
+        $auth.submitRegistration($scope.registrationForm)
+          .then(function(resp) {
+            Flash.create('success', "Signup success");
+          })
+          .catch(function(resp) {
+            Flash.create('danger', resp.data.errors.full_messages.join(","));
+          });
+      }
+
+    }
+  };
+}]);

@@ -1,0 +1,24 @@
+'use strict';
+
+bankingApp.directive('transactionDeposit', ['$rootScope', 'transactionService', 'Flash', function($rootScope, transactionService, Flash) {
+  return {
+    restrict: 'E',
+    templateUrl: "<%= asset_path 'deposit.html' %>",
+    controller: function($scope) {
+
+      $scope.deposit = function() {
+        transactionService.deposit($scope.depositForm)
+          .then(function(resp) {
+          	$scope.depositForm = {}
+            $rootScope.$broadcast('getStatement');
+            Flash.create('success', "Deposited successfully")
+            console.log(resp);
+          })
+          .catch(function(resp) {
+            console.log(resp);
+            Flash.create('danger', resp.data.errors.join(","));
+          });
+      }
+    }
+  };
+}]);

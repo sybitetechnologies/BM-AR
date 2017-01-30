@@ -1,0 +1,29 @@
+'use strict';
+
+bankingApp.directive('transactionStatement', ['$rootScope', 'transactionService', '$auth', function($rootScope, transactionService, $auth) {
+  return {
+    restrict: 'E',
+    templateUrl: "<%= asset_path 'statement.html' %>",
+    controller: function($scope) {
+
+      $rootScope.$on('getStatement', function() {
+        $scope.getStatement();
+      });
+
+      $scope.getStatement = function() {
+        transactionService.statement()
+          .then(function(resp) {
+            $rootScope.currentUser = $auth.retrieveData("auth_headers")['uid'];
+            $scope.statement = resp.data.transactions;
+            $scope.balance = resp.data.balance;
+            console.log(resp);
+          })
+          .catch(function(resp) {
+            console.log(resp);
+          });
+      }
+
+      $scope.getStatement();
+    }
+  };
+}]);

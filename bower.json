@@ -1,0 +1,20 @@
+{
+  "name": "banking",
+  "version": "0.0.1",
+  "directory": "vendor/assets/bower_components",
+  "dependencies": {
+    "angular": "1.5.10",
+    "angular-resource": "1.5.10",
+    "angular-cookies": "1.5.10",
+    "angular-sanitize": "1.5.10",
+    "angular-animate": "1.5.10",
+    "angular-touch": "1.5.10",
+    "angular-route": "1.5.10",
+    "ng-token-auth": "^0.0.29",
+    "angular-cookie": "^4.1.0",
+    "angular-flash-alert": "^2.4.0"
+  },
+  "resolutions": {
+    "angular": "1.5.10"
+  }
+}

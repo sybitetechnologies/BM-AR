@@ -1,0 +1,13 @@
+<h1>Balance:: {{balance}}</h1>
+<h2>Statement:</h2>
+<div ng-repeat="trans in statement">
+	<div>
+		<span>amount {{trans.amount}}</span>
+		<span ng-if="trans.debited_user.email == currentUser">
+			Debited from {{trans.debited_user.email}}
+		</span>
+		<span ng-if="trans.credited_user.email == currentUser">
+			Credit to {{trans.credited_user.email}}
+		</span>
+	</div>
+</div>

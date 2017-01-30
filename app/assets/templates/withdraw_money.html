@@ -1,0 +1,11 @@
+<div>
+  <h1>Withdraw money</h1>
+  <form class="form-signin" ng-submit="withdraw(withdrawferForm)" role="form" ng-init="withdrawferForm = {}">
+    <div class="form-group">
+      <label>amount</label>
+      <input type="text" name="amount" ng-model="withdrawferForm.amount" required="required" class="form-control"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg">Deposit</button>
+  </form>
+</div>

@@ -1,0 +1,22 @@
+'use strict';
+
+bankingApp.directive('userLogin', ['sessionService', '$auth', 'Flash', function(sessionService, $auth, Flash) {
+  return {
+    restrict: 'E',
+    templateUrl: "<%= asset_path 'login.html' %>",
+    controller: function($scope) {
+
+      $scope.login = function() {
+        $auth.submitLogin($scope.loginForm)
+          .then(function(resp) {
+            window.location = '/main';
+            Flash.create('success', "Loggedin successfully")
+          })
+          .catch(function(resp) {
+            Flash.create('danger', resp.data.errors.full_messages.join(","))
+          });
+      }
+
+    }
+  };
+}]);

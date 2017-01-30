@@ -1,0 +1,22 @@
+'use strict';
+
+bankingApp.directive('transactionToOther', ['$rootScope', 'transactionService', 'Flash', function($rootScope, transactionService, Flash) {
+  return {
+    restrict: 'E',
+    templateUrl: "<%= asset_path 'transfer_to_other.html' %>",
+    controller: function($scope) {
+
+      $scope.otherAccount = function() {
+        transactionService.otherAccount($scope.transferForm)
+          .then(function(resp) {
+          	$scope.transferForm = {}
+          	$rootScope.$broadcast('getStatement');
+            Flash.create('success', "Transfered successfully")
+          })
+          .catch(function(resp) {
+            Flash.create('danger', resp.data.errors.join(","))
+          });
+      }
+    }
+  };
+}]);

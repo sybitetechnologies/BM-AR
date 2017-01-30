@@ -1,0 +1,24 @@
+'use strict';
+
+bankingApp.directive('transactionWithdraw', ['$rootScope', 'transactionService', 'Flash', function($rootScope, transactionService, Flash) {
+  return {
+    restrict: 'E',
+    templateUrl: "<%= asset_path 'withdraw_money.html' %>",
+    controller: function($scope) {
+
+      $scope.withdraw = function() {
+        transactionService.withdraw($scope.withdrawferForm)
+          .then(function(resp) {
+          	$scope.withdrawferForm = {}
+          	$rootScope.$broadcast('getStatement');
+            Flash.create('success', "Withdrawn successfully")
+            console.log(resp);
+          })
+          .catch(function(resp) {
+            console.log(resp);
+            Flash.create('danger', resp.data.errors.join(","));
+          });
+      }
+    }
+  };
+}]);
